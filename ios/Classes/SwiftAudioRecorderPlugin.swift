@@ -31,7 +31,7 @@ public class SwiftAudioRecorderPlugin: NSObject, FlutterPlugin, AVAudioRecorderD
             }
             let settings = [
                 AVFormatIDKey: getOutputFormatFromString(mExtension),
-                AVSampleRateKey: 12000,
+                AVSampleRateKey: dic["bitrate"] as? Int ?? 12000,
                 AVNumberOfChannelsKey: 1,
                 AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
             ]

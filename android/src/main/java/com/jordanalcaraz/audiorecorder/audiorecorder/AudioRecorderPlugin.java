@@ -29,6 +29,7 @@ public class AudioRecorderPlugin implements MethodCallHandler {
   private static String mFilePath = null;
   private Date startTime = null;
   private String mExtension = "";
+  private int mBitRate = 12000;
   /**
    * Plugin registration.
    */
@@ -48,6 +49,7 @@ public class AudioRecorderPlugin implements MethodCallHandler {
         Log.d(LOG_TAG, "Start");
         String path = call.argument("path");
         mExtension = call.argument("extension");
+        mBitRate = call.argument("bitrate");
         startTime = Calendar.getInstance().getTime();
         if (path != null) {
           mFilePath = path;
@@ -96,7 +98,8 @@ public class AudioRecorderPlugin implements MethodCallHandler {
     mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
     mRecorder.setOutputFormat(getOutputFormatFromString(mExtension));
     mRecorder.setOutputFile(mFilePath);
-    mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+    mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
+    mRecorder.setAudioEncodingBitRate(mBitRate);
 
     try {
       mRecorder.prepare();
